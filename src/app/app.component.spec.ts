@@ -1,10 +1,18 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { SpinnerComponent } from './shared/ui/spinner/spinner.component';
+import { NotificationComponent } from './shared/ui/notification/notification.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [
+        RouterModule.forRoot([]),
+        SpinnerComponent,
+        NotificationComponent,
+        AppComponent
+      ],
     }).compileComponents();
   });
 
@@ -20,10 +28,17 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('banco-xyz');
   });
 
-  it('should render title', () => {
+  it('should render the spinner component', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, banco-xyz');
+    expect(compiled.querySelector('app-spinner')).not.toBeNull();
+  });
+
+  it('should render the notification component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-notification')).not.toBeNull();
   });
 });

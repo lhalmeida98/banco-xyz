@@ -1,0 +1,67 @@
+<app-notification></app-notification>
+<div class="button-container">
+  <button class="btn btn-home" (click)="navigateHome()">
+    <img src="assets/icons/home.png" alt="Home" class="home-icon">
+  </button>
+</div>
+<div class="form-container">
+  <h2>Formulario de Registro</h2>
+  <hr>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="form-group col">
+        <label for="id">ID</label>
+        <input type="text" placeholder="Número único de producto" id="id" formControlName="id" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'id')){
+          <span class="error-message">{{ getFieldError('id') }}</span>
+        }
+      </div>
+      <div class="form-group col">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" formControlName="name" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'name')){
+          <span class="error-message">{{ getFieldError('name') }}</span>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label for="description">Descripción</label>
+        <input type="text" id="description" formControlName="description" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'description')){
+          <span class="error-message">{{ getFieldError('description') }}</span>
+        }
+      </div>
+      <div class="form-group col">
+        <label for="logo">Logo</label>
+        <input type="text" id="logo" formControlName="logo" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'logo')){
+          <span class="error-message">{{ getFieldError('logo') }}</span>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label for="date_release">Fecha de Liberación</label>
+        <input type="date" id="date_release" formControlName="date_release" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'date_release')){
+          <span class="error-message">{{ getFieldError('date_release') }}</span>
+        }
+      </div>
+      <div class="form-group col">
+        <label for="date_revision">Fecha de Revisión</label>
+        <input type="date" id="date_revision" formControlName="date_revision" class="form-control" required>
+        @if(fieldValidator.validatorInput(productForm,'date_revision')){
+          <span class="error-message">{{ getFieldError('date_revision') }}</span>
+        }
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="reset" class="btn btn-secondary" (click)="onReset()">Reiniciar</button>
+      <button type="submit" class="btn btn-primary" [ngClass]="{ 'btn-disabled': !productForm.valid}" >Agregar</button>
+    </div>
+  </form>
+  @if (errorMessage) {
+    <app-error-message [errorMessage]="errorMessage"/>
+  }
+</div>

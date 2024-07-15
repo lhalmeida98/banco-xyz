@@ -1,0 +1,15 @@
+@if (show) {
+  <div class="modal-overlay">
+   <div class="modal">
+     <div class="modal-content">
+       <div class="modal-body">
+         <p>¿Estas seguro de eliminar el producto {{ title }}?</p>
+       </div>
+       <div class="modal-footer">
+         <button class="btn btn-secondary" (click)="onClose()">Cancelar</button>
+         <button class="btn btn-primary" (click)="onConfirm()">Confirmar</button>
+       </div>
+     </div>
+   </div>
+ </div>
+}

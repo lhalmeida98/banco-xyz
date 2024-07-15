@@ -1,0 +1,25 @@
+.skeleton-loader {
+  .skeleton-header {
+    height: 60px;
+    background: #e0e0e0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+
+  .skeleton-row {
+    display: flex;
+    margin-bottom: 10px;
+
+    .skeleton-cell {
+      flex: 1;
+      height: 40px;
+      background: #f0f0f0;
+      margin-right: 10px;
+      border-radius: 4px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

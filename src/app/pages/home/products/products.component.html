@@ -1,0 +1,73 @@
+<app-notification></app-notification>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar.."
+      [(ngModel)]="query"
+      (ngModelChange)="queryChanges$.next($event)"
+    >
+    <button  routerLink="/home/add-product"  class="add-button">Agregar</button>
+
+  </div>
+  <div class="table-container">
+    @if(!$loading()){
+      <div class="table-body">
+        <table>
+          <thead>
+            <tr>
+              <th class="title-column">Logo</th>
+              <th>Nombre del producto</th>
+              <th>Descripción  <img src="assets/icons/icon-information.svg" alt="info" class="info-icon"></th>
+              <th>Fecha de liberación <img src="assets/icons/icon-information.svg" alt="info" class="info-icon"></th>
+              <th>Fecha de reestructuración <img src="assets/icons/icon-information.svg" alt="info" class="info-icon"></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of $products(); track product.id) {
+              <tr>
+                <td><img src="assets/icons/icon-tarjeta.png" alt="Product Logo" class="product-logo"></td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release }}</td>
+                <td>{{ product.date_revision }}</td>
+                <td class="menu-column">
+                  <img src="assets/icons/icons-menu.png" alt="menu" class="info-icon" (click)="toggleMenu(product.id)">
+                  @if(selectedProductId === product.id){
+                    <div class="dropdown-menu">
+                      <button (click)="onEdit(product.id)">Editar</button>
+                      <button (click)="onDelete(product.id, product.name)">Eliminar</button>
+                    </div>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <span>{{ $products().length }} Resultados</span>
+        <select [value]="itemsPerPage()" (change)="onItemsPerPageChange($event)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+    } @else {
+
+      <app-skeleton-loader></app-skeleton-loader>
+    }
+  </div>
+
+  @if (errorMessage) {
+    <app-error-message [errorMessage]="errorMessage"/>
+  }
+
+<app-modal-confirm
+  [show]="showConfirmModal"
+  [title]="productNameSelected"
+  [message]="'¿Estás seguro de eliminar el producto?'"
+  (confirm)="confirmDelete()"
+  (close)="showConfirmModal = false">
+</app-modal-confirm>

@@ -1,0 +1,12 @@
+@for (notification of notifications; track $index) {
+  <div class="notification" [ngClass]="notification.type">
+    <img [src]="'assets/icons/' + notification.type + '.png'" alt="{{ notification.type }} icon">
+    <div class="notification-content">
+      <span class="notification-title">{{ notification.title }}</span>
+      <span class="notification-message">{{ notification.message }}</span>
+    </div>
+  </div>
+
+}
+
+
