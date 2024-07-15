@@ -27,7 +27,7 @@ export class ProductsService {
     this.$loading.set(true);
     return this.http.get<{ data: FinancialProduct[] }>(`${this.apiUrlBank}${this.strBp}${this.strProducts}`)
       .pipe(
-        delay(1000),
+        //delay(1000),
         map(response => {
           let products = response.data;
           if (nameProduct) {
